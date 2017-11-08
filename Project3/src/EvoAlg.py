@@ -1,6 +1,6 @@
 #Super class for the three evolutionary training algorithms
 from src.backprop.bpNetCreator import BPNetCreator
-from src import Driver
+from src.Driver import test
 import random
 class EvoAlg:
     def __init__(self, data, popSize, hiddenLayerNum, nodesInHLNum, crossoverRate):
@@ -37,7 +37,7 @@ class EvoAlg:
         totalCorrect = 0
         #Assuming driver has a test, that returns 1 if classified correctly, 0 if not
         for i in range(len(self.data)):
-            totalCorrect += Driver.test(self.data[i], self.expectedOut[i], network)
+            totalCorrect += test(self.data[i], self.expectedOut[i], network)
         return(totalCorrect / len(self.data))
 
     #will perform binary crossover on two networks, thought this could also just calculate the mask

@@ -35,12 +35,13 @@ class BPNetCreator:
                     self.network[j].append(node.BPNode(self.nodesInHLNum + 1))
             # append bias node at end
             self.network[j].append(node.BiasNode(0))
-        # output layer node: uses no activation function, just sum
+        # output layer nodes
         self.network.append([])
         for i in range(self.outNum):
+            # if there is one or more hidden layers, weights array is based on hiddenlayer node number
             if (self.hiddenLayerNum != 0):
-                self.network[self.hiddenLayerNum + 1].append(node.Node(self.nodesInHLNum + 1))
+                self.network[self.hiddenLayerNum + 1].append(node.BPNode(self.nodesInHLNum + 1))
             else:
-                self.network[self.hiddenLayerNum + 1].append(node.Node(self.inNum + 1))
+                self.network[self.hiddenLayerNum + 1].append(node.BPNode(self.inNum + 1))
         return self.network
     

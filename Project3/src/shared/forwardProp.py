@@ -66,6 +66,13 @@ class ForwardProp:
     
     # for debugging
     def getHypothesis(self):
-        return self.hypothesis
+        # convert hypothesis to class 1 or 0
+        hypothesisArray = []
+        for i in range(len(self.hypothesis)):
+            if (self.hypothesis[i] > .5): 
+                hypothesisArray.append(1)
+            else: 
+                hypothesisArray.append(0)
+        return hypothesisArray
             
             
