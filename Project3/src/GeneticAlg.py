@@ -4,14 +4,17 @@ import random
 
 class GeneticAlg(EvoAlg): 
     
-    def train(self, maxIterations):
-        self.initPop()
+    # train our population over maxIterations using the given data
+    def train(self, maxIterations, inputData, outputData):
+        self.inputData = inputData
+        self.outputData = outputData
+        # for each generation
         while(self.genCount <= maxIterations):
-            self.currentGen += 1
-            parents = self.select()
+            self.currentGen += 1 # increment generation count
+            parents = self.select() # select parents using tournament selection
             children = []
             # populate children via crossover
-            for i in range(len(parents)):
+            for i in range(len(parents)): # for every parent
                 if (i % 2 == 0):
                     if (i + 2 > len(parents)):
                         children.append(parents[i])
@@ -39,6 +42,7 @@ class GeneticAlg(EvoAlg):
             index = random.randint(0,self.popSize-1)
             competitors.append(self.population[index])
             k -= 1
+        print(competitors)
         # compete the competitors to get winner and return winner
         winner = self.hostTournament(competitors)
         return winner
@@ -54,4 +58,3 @@ class GeneticAlg(EvoAlg):
         return best
                 
            
-        

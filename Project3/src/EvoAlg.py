@@ -3,7 +3,7 @@ from src.backprop.bpNetCreator import BPNetCreator
 from src.Driver import Driver
 import random
 class EvoAlg:
-    def __init__(self, data, popSize, hiddenLayerNum, nodesInHLNum, crossoverRate):
+    def __init__(self, popSize, hiddenLayerNum, nodesInHLNum, crossoverRate):
         self.population = None
         self.popSize = popSize
         #the threshold for the crossover probability. If .5 attributes will have a 50% chance of cross over
@@ -13,9 +13,10 @@ class EvoAlg:
         self.genCount = 0
         self.children = []
         self.expectedOut = None
-        self.data = data
         self.getExpectedOut()
         self.netCreator = BPNetCreator(self.hiddenLayerNum, self.nodesInHLNum, len(self.data[0]), len(self.expectedOut[0]))
+        # initialize population
+        self.initPop()
 
     #If we pass the data set with the expected output at the end of each data point
     def getExpectedOut(self):
@@ -94,7 +95,8 @@ class EvoAlg:
                 maxFit = fit
                 best = i
         return best
-    def train(self, maxiterations):
+    
+    def train(self, maxiterations, data):
         pass
         
         
