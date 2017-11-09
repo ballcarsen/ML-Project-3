@@ -94,5 +94,7 @@ class EvoAlg:
                 maxFit = fit
                 best = i
         return best
-    def train(self):
+    def train(self, maxiterations):
         pass
+        
+        
