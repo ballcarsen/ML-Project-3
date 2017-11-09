@@ -3,26 +3,20 @@ from src.backprop.bpNetCreator import BPNetCreator
 from src.Driver import Driver
 import random
 class EvoAlg:
-    def __init__(self, popSize, hiddenLayerNum, nodesInHLNum, crossoverRate):
+    def __init__(self, popSize, hiddenLayerNum, nodesInHLNum, crossoverRate, inputData, expectedOut):
+        self.inputData = inputData
+        self.expectedOut = expectedOut
         self.population = None
         self.popSize = popSize
         #the threshold for the crossover probability. If .5 attributes will have a 50% chance of cross over
         self.crossoverRate = crossoverRate
         self.hiddenLayerNum = hiddenLayerNum
         self.nodesInHLNum = nodesInHLNum
-        self.genCount = 0
         self.children = []
-        self.expectedOut = None
-        self.getExpectedOut()
-        self.netCreator = BPNetCreator(self.hiddenLayerNum, self.nodesInHLNum, len(self.data[0]), len(self.expectedOut[0]))
+        self.netCreator = BPNetCreator(self.hiddenLayerNum, self.nodesInHLNum, len(self.inputData[0]), len(self.expectedOut[0]))
         # initialize population
         self.initPop()
 
-    #If we pass the data set with the expected output at the end of each data point
-    def getExpectedOut(self):
-        self.expectedOut = []
-        for i in self.data:
-            self.expectedOut.append(i.pop())
 
     #Creates popSize networks with random weights
     def initPop(self):
@@ -38,9 +32,9 @@ class EvoAlg:
         totalCorrect = 0
         driver = Driver()
         #Assuming driver has a test, that returns 1 if classified correctly, 0 if not
-        for i in range(len(self.data)):
-            totalCorrect += driver.test(self.data[i], self.expectedOut[i], network)
-        return(totalCorrect / len(self.data))
+        for i in range(len(self.inputData)):
+            totalCorrect += driver.test(self.inputData[i], self.expectedOut[i], network)
+        return(totalCorrect / len(self.inputData))
 
     #will perform binary crossover on two networks, thought this could also just calculate the mask
     #this will return two children, I think mutation comes after crossover?
@@ -74,17 +68,17 @@ class EvoAlg:
     We will know the index from the train method, so this way we wont need to pass the index, but we could if we want the
     bulk of the replacement code to be in this method.
     '''
-    def replace(self, parent, child):
-        #Fitness of the parent
-        fitP = self.evalFitness(parent)
-        #Fitness of the child
-        fitC = self.evalFitness(child)
-        if fitC > fitP:
-            #adds the child to the child list if it will replace its parent
-            self.children.append(child)
-            return 1
-        else:
-            return 0
+   # replaces any parents with their children if their children have better fitness
+    def replaceAll(self):
+        for i in range(self.popSize):
+            #Fitness of the parent
+            fitP = self.evalFitness(self.population[i])
+            #Fitness of the child
+            fitC = self.evalFitness(self.children[i])
+            # if the child's fitness is greater, replace the parent
+            if fitC > fitP:
+                self.population[i] = self.children[i]
+        
     #itterates through the population, retuns the individual with the highest percent correct
     def getBestIndiv(self):
         maxFit = 0

@@ -5,25 +5,25 @@ import random
 class GeneticAlg(EvoAlg): 
     
     # train our population over maxIterations using the given data
-    def train(self, maxIterations, inputData, outputData):
-        self.inputData = inputData
-        self.outputData = outputData
+    def train(self, maxIterations):
         # for each generation
         while(self.genCount <= maxIterations):
+            self.children = [] # reset children array
             self.currentGen += 1 # increment generation count
             parents = self.select() # select parents using tournament selection
-            children = []
             # populate children via crossover
             for i in range(len(parents)): # for every parent
                 if (i % 2 == 0):
                     if (i + 2 > len(parents)):
-                        children.append(parents[i])
+                        self.children.append(parents[i])
                     else:
                         childArr = self.crossover(parents[i],parents[i+1])
                         for child in childArr:
-                            children.append(child)
-            children = [self.gaussMuatate(child) | child in children]
-            self.population = children # generational replacement
+                            self.children.append(child)
+            # mutate children
+            self.children = [self.gaussMuatate(child) | child in self.children]
+            # replace members of self.population with self.children if the children are more fit
+            self.replace()
     
     def gaussMuatate(self, child):
         return child

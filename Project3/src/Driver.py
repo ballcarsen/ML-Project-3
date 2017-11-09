@@ -28,3 +28,4 @@ dataSet1.getFolds()
 #to get the 10 folds
 print(dataSet1.crossValidatedTrain[0])
 print(dataSet1.crossValidatedTrainOut[0])
+
