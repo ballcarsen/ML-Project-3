@@ -13,28 +13,23 @@ class Test(unittest.TestCase):
     
     def setUp(self):
         inNum = 3
-        outNum = 2
+        outNum = 4
         netCreator = BPNetCreator(2,5,inNum,outNum)
         network = netCreator.create()
         inputs = []
         for i in range(inNum):
             inputs.append(random.uniform(0,1))
         print("inputs", inputs)
-        self.expectedOutputs = []
-        for i in range(outNum):
-            self.expectedOutputs.append(random.randint(0,1))  
+        self.expectedOutputs = [1,0,0,0]
         print("expected outputs", self.expectedOutputs)
         self.fp = ForwardProp(network,inputs,self.expectedOutputs)
         self.hypothesis = self.fp.getHypothesis()
         pass
 
 
-    def testHypothesisOneOrZero(self):     
-        for prediction in self.hypothesis:
-            self.assertTrue(prediction == 1 or prediction == 0, "hypothesis didn't return a whole number")
+    def testHypothesisBetweenZeroAndLengthOfOutputs(self):     
+            self.assertTrue(self.hypothesis < len(self.expectedOutputs) and self.hypothesis >= 0, "hypothesis is not within range")
             
-    def testHypothesisSize(self):
-        self.assertEqual(len(self.expectedOutputs), len(self.hypothesis), "length of hypothesis not equal to expected outputs")
+    def testHypothesisIsWholeNumber(self):
+        self.assertEqual(self.hypothesis % 1, 0, "hypothesis is not a whole number")
         
-    
-  

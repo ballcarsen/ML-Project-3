@@ -64,15 +64,15 @@ class ForwardProp:
             errors.append(self.hypothesis[i] - self.expectedOuts[i]) 
         return errors
     
-    # for debugging
+    # return whatever class is most likely, based on the node with the highest activation
     def getHypothesis(self):
         # convert hypothesis to class 1 or 0
-        hypothesisArray = []
+        bestHypothesis = -1
+        bestIndex = -1
         for i in range(len(self.hypothesis)):
-            if (self.hypothesis[i] > .5): 
-                hypothesisArray.append(1)
-            else: 
-                hypothesisArray.append(0)
-        return hypothesisArray
+            if (self.hypothesis[i] > bestHypothesis): 
+                bestHypothesis = self.hypothesis[i]
+                bestIndex = i
+        return bestIndex
             
             
