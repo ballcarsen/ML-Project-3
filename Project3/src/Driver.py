@@ -1,6 +1,7 @@
 from src.shared.forwardProp import ForwardProp
 from src.Data import Data
 from pandas.tests.io.msgpack.test_read_size import test_correct_type_nested_array
+from src.GeneticAlg import GeneticAlg
 
 class Driver:
 
@@ -29,3 +30,5 @@ dataSet1.getFolds()
 print(dataSet1.crossValidatedTrain[0])
 print(dataSet1.crossValidatedTrainOut[0])
 
+GA = GeneticAlg(10, 2, 4, .1, dataSet1.crossValidatedTrain[0], dataSet1.crossValidatedTrainOut[0])
+GA.train(10000)
