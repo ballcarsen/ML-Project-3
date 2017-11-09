@@ -26,10 +26,7 @@ class Data:
             line = line.split('\t')
             if(line[len(line) - 1] == "\n"):
                 line.pop()
-
-            #line[len(line) - 1] = line[len(line) - 1].replace("\n", "")
-            self.expectedOut.append(float(line.pop()))
-            # self.expectedOut.append(self.toArrayRep(line.pop()))
+            self.expectedOut.append(self.toArrayRep(line.pop()))
             self.data.append(line)
         for k in self.data:
             for i in range(len(k)):
@@ -43,7 +40,9 @@ class Data:
     def toArrayRep(self, index):
         array = []
         for i in range(self.numberOfClasses):
+            print(index)
             if (int(i) == int(index)):
+
                 array.append(1)
             else:
                 array.append(0)
