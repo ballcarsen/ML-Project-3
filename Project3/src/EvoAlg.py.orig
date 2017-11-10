@@ -1,6 +1,10 @@
 #Super class for the three evolutionary training algorithms
 from src.backprop.bpNetCreator import BPNetCreator
+<<<<<<< HEAD
+# from src.Driver import Driver
+=======
 from src.shared.forwardProp import ForwardProp
+>>>>>>> 8a88d6723ce3306c3ecfe4a122af49068558c35d
 import random
 class EvoAlg:
     def __init__(self, popSize, hiddenLayerNum, nodesInHLNum, crossoverRate, inputData, expectedOut):
@@ -30,7 +34,6 @@ class EvoAlg:
     #Calculates the percent correctly classified by a network
     def evalFitness(self, network):
         totalCorrect = 0
-        driver = Driver()
         #Assuming driver has a test, that returns 1 if classified correctly, 0 if not
         for i in range(len(self.inputData)):
             totalCorrect += self.test(self.inputData[i], self.expectedOut[i], network)
