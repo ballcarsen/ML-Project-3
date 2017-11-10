@@ -40,7 +40,6 @@ class Data:
     def toArrayRep(self, index):
         array = []
         for i in range(self.numberOfClasses):
-            print(index)
             if (int(i) == int(index)):
 
                 array.append(1)
