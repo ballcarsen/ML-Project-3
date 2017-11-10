@@ -28,21 +28,28 @@ class GeneticAlg(EvoAlg):
             # mutate children
 
             for child in self.children:
-                child = self.gaussMuatate(child)
-
+                child = self.gaussMuatate(child, sigma)
             # replace members of self.population with self.children if the children are more fit
             self.replaceAll()
+            print(self.test(self.inputData, self.expectedOut, self.getBestIndiv()) / float(len(self.inputData)))
     
     def gaussMuatate(self, child, sigma):
-        for i in self.population:
-            #for i in
-
+        for i in range(len(child) - 1):
+            for k in range(len(child[i])):
+                for j in range(len(child[i][k].weights)):
+                    child[i][k].weights[j] = child[i][k].weights[j] + sigma
 
     def calcSigma(self):
-        percentage = []
-        for i in self.population:
-            percentage.append(self.caclulateFitness(i))
-        T1 = Tester(percentage)
+        weights = []
+        count = 0
+        for c in range(len(self.population)):
+            net = self.population[c]
+            for i in range(len(net)):
+                for k in range(len(net[i])):
+                    for j in range(len(net[i][k].weights)):
+                        weights.append(net[i][k].weights[j])
+                        count+= 1
+        T1 = Tester(weights)
         return math.sqrt(T1.get_variance())
 
     def select(self):
