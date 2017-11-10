@@ -6,10 +6,10 @@ class BPNetCreator:
         self.nodesInHLNum = nodesInHLNum
         self.inNum = inNum
         self.outNum = outNum
-        self.network = []
        
     # create and return network of nodes
     def create(self):
+        self.network = []
         # input layer:
         self.network.append([])
         # a node for each input 

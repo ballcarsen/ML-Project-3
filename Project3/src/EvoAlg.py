@@ -2,6 +2,7 @@
 from src.backprop.bpNetCreator import BPNetCreator
 from src.shared.forwardProp import ForwardProp
 import random
+from src.shared.printNetwork import NetworkPrinter
 class EvoAlg:
     def __init__(self, popSize, hiddenLayerNum, nodesInHLNum, crossoverRate, inputData, expectedOut):
         self.inputData = inputData
@@ -22,15 +23,17 @@ class EvoAlg:
     def initPop(self):
         self.population = []
         #Initializes a new network creator from the backprop code
-
+        #network = self.netCreator.create()
+        #netPrinter = NetworkPrinter()
+        #netPrinter.printNet(network)
         for i in range(self.popSize):
             #Creates popSize MLP's and adds them to the population list
             self.population.append(self.netCreator.create())
+            
 
     #Calculates the percent correctly classified by a network
     def evalFitness(self, network):
         totalCorrect = 0
-        driver = Driver()
         #Assuming driver has a test, that returns 1 if classified correctly, 0 if not
         for i in range(len(self.inputData)):
             totalCorrect += self.test(self.inputData[i], self.expectedOut[i], network)
