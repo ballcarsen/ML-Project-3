@@ -1,6 +1,7 @@
 #Super class for the three evolutionary training algorithms
 from src.backprop.bpNetCreator import BPNetCreator
 from src.shared.forwardProp import ForwardProp
+
 import random
 class EvoAlg:
     def __init__(self, popSize, hiddenLayerNum, nodesInHLNum, crossoverRate, inputData, expectedOut):

@@ -1,5 +1,8 @@
 #Child class of EvoAlg, the Genetic Algorithm
+import math
+
 from src.EvoAlg import EvoAlg
+from src.Tester import Tester
 import random
 
 class GeneticAlg(EvoAlg): 
@@ -8,6 +11,7 @@ class GeneticAlg(EvoAlg):
     def train(self, maxIterations):
         # for each generation
         genCount = 0
+        sigma = self.calcSigma()
         while(genCount <= maxIterations):
             self.children = [] # reset children array
             genCount += 1 # increment generation count
@@ -22,13 +26,22 @@ class GeneticAlg(EvoAlg):
                         for child in childArr:
                             self.children.append(child)
             # mutate children
-            self.children = [self.gaussMuatate(child) | child in self.children]
+            self.children = [self.gaussMuatate(child,sigma) | child in self.children]
             # replace members of self.population with self.children if the children are more fit
             self.replace()
     
-    def gaussMuatate(self, child):
-        return child
-        
+    def gaussMuatate(self, child, sigma):
+        for i in self.population:
+            #for i in
+
+
+    def calcSigma(self):
+        percentage = []
+        for i in self.population:
+            percentage.append(self.caclulateFitness(i))
+        T1 = Tester(percentage)
+        return math.sqrt(T1.get_variance())
+
     def select(self):
         parents = []
         for i in range(self.popSize):

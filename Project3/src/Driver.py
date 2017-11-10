@@ -10,6 +10,9 @@ class Driver:
         self.numberOfClasses = 3 # will need to change this so it's not hard coded
         self.data
         self.expectedOut
+        self.gABest = []
+        self.evoAlgBest = []
+        self.evoStraBest = []
 
     def test(self, input, expectedOut, network):
         correct = 0 #incorrect by default
