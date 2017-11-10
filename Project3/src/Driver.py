@@ -36,6 +36,6 @@ dataSet1.getFolds()
 #to get the 10 folds
 #print(dataSet1.crossValidatedTrain[0])
 #print(dataSet1.crossValidatedTrainOut[0])
-GA = GeneticAlg(10, 2, 4, .1, dataSet1.crossValidatedTrain[0], dataSet1.crossValidatedTrainOut[0])
+GA = GeneticAlg(100, 2, 50, .1, dataSet1.crossValidatedTrain[0], dataSet1.crossValidatedTrainOut[0])
 GA.train(100)
 

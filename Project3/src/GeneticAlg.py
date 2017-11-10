@@ -31,7 +31,7 @@ class GeneticAlg(EvoAlg):
                 child = self.gaussMuatate(child, sigma)
             # replace members of self.population with self.children if the children are more fit
             self.replaceAll()
-            print(self.test(self.inputData, self.expectedOut, self.getBestIndiv()) / float(len(self.inputData)))
+            print(self.evalFitness(self.getBestIndiv()), "performance")
     
     def gaussMuatate(self, child, sigma):
         for i in range(len(child) - 1):
