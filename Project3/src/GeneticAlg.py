@@ -37,7 +37,7 @@ class GeneticAlg(EvoAlg):
         for i in range(len(child) - 1):
             for k in range(len(child[i])):
                 for j in range(len(child[i][k].weights)):
-                    child[i][k].weights[j] = child[i][k].weights[j] + sigma
+                    child[i][k].weights[j] = child[i][k].weights[j] + math.random(0,sigma)
 
     def calcSigma(self):
         weights = []

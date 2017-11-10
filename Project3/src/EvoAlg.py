@@ -93,8 +93,8 @@ class EvoAlg:
         
     #itterates through the population, retuns the individual with the highest percent correct
     def getBestIndiv(self):
-        maxFit = 0
-        best = None
+        maxFit = 0.0000
+        best = self.population[0]
         for i in self.population:
             fit = self.evalFitness(i)
             if fit > maxFit:
