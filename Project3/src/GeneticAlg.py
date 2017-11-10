@@ -26,9 +26,12 @@ class GeneticAlg(EvoAlg):
                         for child in childArr:
                             self.children.append(child)
             # mutate children
-            self.children = [self.gaussMuatate(child,sigma) | child in self.children]
+
+            for child in self.children:
+                child = self.gaussMuatate(child)
+
             # replace members of self.population with self.children if the children are more fit
-            self.replace()
+            self.replaceAll()
     
     def gaussMuatate(self, child, sigma):
         for i in self.population:
@@ -56,7 +59,7 @@ class GeneticAlg(EvoAlg):
             index = random.randint(0,self.popSize-1)
             competitors.append(self.population[index])
             k -= 1
-        print(competitors)
+        #print(competitors)
         # compete the competitors to get winner and return winner
         winner = self.hostTournament(competitors)
         return winner

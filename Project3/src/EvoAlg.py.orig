@@ -1,9 +1,11 @@
 #Super class for the three evolutionary training algorithms
 from src.backprop.bpNetCreator import BPNetCreator
+<<<<<<< HEAD
+# from src.Driver import Driver
+=======
 from src.shared.forwardProp import ForwardProp
-
+>>>>>>> 8a88d6723ce3306c3ecfe4a122af49068558c35d
 import random
-from src.shared.printNetwork import NetworkPrinter
 class EvoAlg:
     def __init__(self, popSize, hiddenLayerNum, nodesInHLNum, crossoverRate, inputData, expectedOut):
         self.inputData = inputData
@@ -24,13 +26,10 @@ class EvoAlg:
     def initPop(self):
         self.population = []
         #Initializes a new network creator from the backprop code
-        #network = self.netCreator.create()
-        #netPrinter = NetworkPrinter()
-        #netPrinter.printNet(network)
+
         for i in range(self.popSize):
             #Creates popSize MLP's and adds them to the population list
             self.population.append(self.netCreator.create())
-            
 
     #Calculates the percent correctly classified by a network
     def evalFitness(self, network):
