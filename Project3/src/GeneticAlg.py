@@ -7,9 +7,10 @@ class GeneticAlg(EvoAlg):
     # train our population over maxIterations using the given data
     def train(self, maxIterations):
         # for each generation
-        while(self.genCount <= maxIterations):
+        genCount = 0
+        while(genCount <= maxIterations):
             self.children = [] # reset children array
-            self.currentGen += 1 # increment generation count
+            genCount += 1 # increment generation count
             parents = self.select() # select parents using tournament selection
             # populate children via crossover
             for i in range(len(parents)): # for every parent

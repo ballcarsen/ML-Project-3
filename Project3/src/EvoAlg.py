@@ -1,6 +1,6 @@
 #Super class for the three evolutionary training algorithms
 from src.backprop.bpNetCreator import BPNetCreator
-from src.Driver import Driver
+from src.shared.forwardProp import ForwardProp
 import random
 class EvoAlg:
     def __init__(self, popSize, hiddenLayerNum, nodesInHLNum, crossoverRate, inputData, expectedOut):
@@ -30,11 +30,20 @@ class EvoAlg:
     #Calculates the percent correctly classified by a network
     def evalFitness(self, network):
         totalCorrect = 0
-        driver = Driver()
         #Assuming driver has a test, that returns 1 if classified correctly, 0 if not
         for i in range(len(self.inputData)):
-            totalCorrect += driver.test(self.inputData[i], self.expectedOut[i], network)
+            totalCorrect += self.test(self.inputData[i], self.expectedOut[i], network)
         return(totalCorrect / len(self.inputData))
+
+    def test(self, input, expectedOut, network):
+        #print(input, expectedOut)
+        #print(len(network[0][1]))
+        correct = 0 #incorrect by default
+        fp = ForwardProp(network,input,expectedOut)
+        # if classification is correct, return 1
+        if (fp.getHypothesis() == expectedOut):
+            correct = 1
+        return correct
 
     #will perform binary crossover on two networks, thought this could also just calculate the mask
     #this will return two children, I think mutation comes after crossover?

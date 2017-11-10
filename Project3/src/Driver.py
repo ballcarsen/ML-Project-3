@@ -12,7 +12,7 @@ class Driver:
 
     def test(self, input, expectedOut, network):
         correct = 0 #incorrect by default
-        fp = ForwardProp(network,input,self.toArrayRep(expectedOut))
+        fp = ForwardProp(network,input,expectedOut)
         # if classification is correct, return 1
         if (fp.getHypothesis() == expectedOut):
             correct = 1
