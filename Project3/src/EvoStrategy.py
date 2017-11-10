@@ -10,6 +10,6 @@ class EvoStrat(GeneticAlg):
     def gaussMuatate(self, child, sigma):
         for i in range(len(child) - 1):
             for k in range(len(child[i])):
-                l = len(child[i])
                 for j in range(len(child[i][k].weights)):
+                    l = len(child[i][j].weights)
                     child[i][k].weights[j] = child[i][k].weights[j] + self.updateVar(l,sigma)
