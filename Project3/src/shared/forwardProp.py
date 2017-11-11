@@ -64,6 +64,9 @@ class ForwardProp:
             errors.append(self.hypothesis[i] - self.expectedOuts[i]) 
         return errors
     
+    def getRawHypothesis(self):
+        return self.hypothesis
+    
     # return whatever class is most likely, based on the node with the highest activation
     def getHypothesis(self):
         # convert hypothesis to class 1 or 0

@@ -7,22 +7,21 @@ import unittest
 from src.shared.forwardProp import ForwardProp
 from src.backprop.bpNetCreator import BPNetCreator
 import random
+from src.shared.printNetwork import NetworkPrinter
 
 
 class Test(unittest.TestCase):
     
     def setUp(self):
-        inNum = 3
-        outNum = 4
-        netCreator = BPNetCreator(2,5,inNum,outNum)
+        inNum = 2
+        outNum = 1
+        netCreator = BPNetCreator(1,2,inNum,outNum)
         network = netCreator.create()
-        inputs = []
-        for i in range(inNum):
-            inputs.append(random.uniform(0,1))
-        print("inputs", inputs)
-        self.expectedOutputs = [1,0,0,0]
-        print("expected outputs", self.expectedOutputs)
+        inputs = [-.9, .2]
+        self.expectedOutputs = [1,0]
         self.fp = ForwardProp(network,inputs,self.expectedOutputs)
+        netPrinter = NetworkPrinter()
+        netPrinter.printNet(network)
         self.hypothesis = self.fp.getHypothesis()
         pass
 

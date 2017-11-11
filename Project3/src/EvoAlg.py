@@ -25,9 +25,6 @@ class EvoAlg:
     def initPop(self):
         self.population = []
         #Initializes a new network creator from the backprop code
-        #network = self.netCreator.create()
-        #netPrinter = NetworkPrinter()
-        #netPrinter.printNet(network)
         for i in range(self.popSize):
             #Creates popSize MLP's and adds them to the population list
             self.population.append(self.netCreator.create())
@@ -44,10 +41,15 @@ class EvoAlg:
 
     def test(self, myInput, expectedOut, network):
         correct = 0 #incorrect by default
+        myInput = [random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1)]
+        print("input", myInput)
         fp = ForwardProp(network,myInput,expectedOut)
         hypothesis = helper.toArrayRep(fp.getHypothesis(), len(expectedOut))
-        #print("Hypothesis: ", hypothesis)
-        #print("actual: ", expectedOut, "\n")
+        print("raw hypothesis: ", fp.getRawHypothesis())
+        print("Hypothesis: ", hypothesis)
+        print("actual: ", expectedOut)
+        #netPrinter = NetworkPrinter()
+        #netPrinter.printNet(network)
         # if classification is correct, return 1
         if (helper.arrayCompare(hypothesis, expectedOut)):
             correct = 1
@@ -90,8 +92,10 @@ class EvoAlg:
         for i in range(self.popSize):
             #Fitness of the parent
             fitP = self.evalFitness(self.population[i])
+            print("parent fitness: ", fitP)
             #Fitness of the child
             fitC = self.evalFitness(self.children[i])
+            print("child fitness", fitC)
             # if the child's fitness is greater, replace the parent
             if fitC > fitP:
                 self.population[i] = self.children[i]
@@ -100,11 +104,12 @@ class EvoAlg:
     def getBestIndiv(self):
         maxFit = 0.0000
         best = self.population[0]
-        for i in self.population:
-            fit = self.evalFitness(i)
+        for indiv in self.population:
+            fit = self.evalFitness(indiv)
+            print("fitness: ", fit)
             if fit > maxFit:
                 maxFit = fit
-                best = i
+                best = indiv
         return best
     
     def train(self, maxiterations, data):

@@ -95,7 +95,7 @@ class Node:
     # initialize random weights
     def initWeights(self):
         for i in range(self.weightNum):
-            randomNum = random.uniform(-.5,.5)
+            randomNum = random.uniform(-1,1)
             self.weights.append(randomNum)
 
     def initTestWeights(self):
@@ -117,9 +117,30 @@ class BPNode(Node):
     # use logistic activation function for backprop
     def activFunct(self, weightedSum):
         #set limits
+        #print("weighted sum", weightedSum)
         if weightedSum > 100: weightedSum = 100
         if weightedSum < -100: weightedSum = -100
-        return 1 / (1 + math.pow(math.e, -1 * weightedSum))
+        activation = 1 / (1 + math.pow(math.e, -1 * weightedSum))
+        #print("activation", activation)
+        return activation
+
+        
+class allOrNoneNode(Node):
+    def __init__(self, weightNum):
+        # call constructor of super
+        Node.__init__(self, weightNum)
+        
+    # use logistic activation function for backprop
+    def activFunct(self, weightedSum):
+        #set limits
+        if weightedSum > 100: weightedSum = 100
+        if weightedSum < -100: weightedSum = -100
+        activation =  1 / (1 + math.pow(math.e, -1 * weightedSum))
+        if (activation > .5):
+            return 1
+        else:
+            return 0
+        
     
 class BiasNode(Node):
     

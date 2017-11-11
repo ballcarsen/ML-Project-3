@@ -2,7 +2,6 @@ def toArrayRep(index, numberOfClasses):
         array = []
         for i in range(numberOfClasses):
             if (int(i) == int(index)):
-
                 array.append(1)
             else:
                 array.append(0)

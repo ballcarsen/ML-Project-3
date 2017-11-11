@@ -21,6 +21,8 @@ class GeneticAlg(EvoAlg):
             #print("prior size of population: ", len(self.population))
             #print("number of parents: ", len(parents))
             # populate children via crossover
+            
+            self.evalFitness(parents[0])
             for i in range(len(parents)): # for every parent
                 # by steps of two
                 if (i % 2 == 0):
@@ -33,20 +35,23 @@ class GeneticAlg(EvoAlg):
                         for child in childArr:
                             self.children.append(child)
             # mutate children
-            for child in self.children:
-                child = self.gaussMuatate(child, sigma)
+            #for child in self.children:
+                #netPrinter.printNet(child)
+                #child = self.gaussMuatate(child, sigma)
             # replace members of self.population with self.children if the children are more fit
             self.replaceAll()
             #print("pop size after repro: ", len(self.population))
-            #netPrinter = NetworkPrinter()
-            #netPrinter.printNet(self.getBestIndiv())
-            print(self.evalFitness(self.getBestIndiv()), "performance")
+            netPrinter = NetworkPrinter()
+            netPrinter.printNet(self.getBestIndiv())
+            #print(self.evalFitness(self.getBestIndiv()), "performance")
     
     def gaussMuatate(self, child, sigma):
         for i in range(len(child) - 1):
             for k in range(len(child[i])):
                 for j in range(len(child[i][k].weights)):
-                    child[i][k].weights[j] = child[i][k].weights[j] + random.uniform(0,sigma)
+                    mutationAmt = random.uniform(0,sigma)
+                    #print("mutation amount: ", mutationAmt)
+                    child[i][k].weights[j] = child[i][k].weights[j] + mutationAmt
 
     def calcSigma(self):
         weights = []
@@ -68,7 +73,7 @@ class GeneticAlg(EvoAlg):
     def select(self):
         parents = []
         for i in range(self.popSize):
-            parents.append(self.tournamentSelection(self.popSize/20))
+            parents.append(self.tournamentSelection(self.popSize/200))
         return parents
         
     
