@@ -43,12 +43,10 @@ class Tester:
         return (self.var1, self.var2)
 
     def get_stdev(self, desc = None):
-        if not desc: return (self.var1**2, self.var2**2)
-        if desc == self.desc1: return self.var1**2
-        if desc == self.desc2 and self.var2:
-            return self.var2**2
-        else:
-            return
+        if not desc: return (math.sqrt(self.var1), math.sqrt(self.var2))
+        if desc == self.desc1: return math.sqrt(self.var1)
+        if desc == self.desc2 and self.var2: return math.sqrt(self.var2)
+        else: return
 
     # Null hypothesis: There is no difference
     def compare(self):
