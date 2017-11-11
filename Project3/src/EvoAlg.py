@@ -41,6 +41,9 @@ class EvoAlg:
 
     def test(self, myInput, expectedOut, network):
         correct = 0 #incorrect by default
+        
+        # MOCK INPUTS FOR TESTING: PLEASE CHANGE!!!
+        
         myInput = [random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1)]
         print("input", myInput)
         fp = ForwardProp(network,myInput,expectedOut)
