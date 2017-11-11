@@ -6,6 +6,7 @@
 from sklearn.model_selection import KFold
 import random
 import numpy as np
+from src import helper
 class Data:
     def __init__(self, numClasses):
         self.numberOfClasses = numClasses
@@ -26,7 +27,7 @@ class Data:
             line = line.split('\t')
             if(line[len(line) - 1] == "\n"):
                 line.pop()
-            self.expectedOut.append(self.toArrayRep(line.pop()))
+            self.expectedOut.append(helper.toArrayRep(line.pop(),self.numberOfClasses))
             self.data.append(line)
         for k in self.data:
             for i in range(len(k)):
@@ -37,15 +38,7 @@ class Data:
         random.shuffle(x)
         self.data, self.expectedOut = zip(*x)
 
-    def toArrayRep(self, index):
-        array = []
-        for i in range(self.numberOfClasses):
-            if (int(i) == int(index)):
-
-                array.append(1)
-            else:
-                array.append(0)
-        return array
+    
     def getFolds(self):
         input = np.array(self.data)
         fold = KFold(n_splits= 10)

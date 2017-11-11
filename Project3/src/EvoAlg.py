@@ -4,6 +4,7 @@ from src.shared.forwardProp import ForwardProp
 
 import random
 from src.shared.printNetwork import NetworkPrinter
+from src import helper
 class EvoAlg:
     def __init__(self, popSize, hiddenLayerNum, nodesInHLNum, crossoverRate, inputData, expectedOut):
         self.inputData = inputData
@@ -40,11 +41,15 @@ class EvoAlg:
             totalCorrect += self.test(self.inputData[i], self.expectedOut[i], network)
         return(totalCorrect / len(self.inputData))
 
-    def test(self, input, expectedOut, network):
+
+    def test(self, myInput, expectedOut, network):
         correct = 0 #incorrect by default
-        fp = ForwardProp(network,input,expectedOut)
+        fp = ForwardProp(network,myInput,expectedOut)
+        hypothesis = helper.toArrayRep(fp.getHypothesis(), len(expectedOut))
+        #print("Hypothesis: ", hypothesis)
+        #print("actual: ", expectedOut, "\n")
         # if classification is correct, return 1
-        if (fp.getHypothesis() == expectedOut):
+        if (helper.arrayCompare(hypothesis, expectedOut)):
             correct = 1
         return correct
 
