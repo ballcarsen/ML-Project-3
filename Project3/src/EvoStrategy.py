@@ -1,12 +1,14 @@
 from src.GeneticAlg import GeneticAlg
+import random
 import math
 
 class EvoStrat(GeneticAlg):
 
     def updateVar(self, length, sigma):
-        u = math.random(0,sigma)
+        u = random.uniform(0,sigma)
         s = sigma * math.exp(u/math.sqrt(length))
         return s
+    
     def gaussMuatate(self, child, sigma):
         for i in range(len(child) - 1):
             for k in range(len(child[i])):
