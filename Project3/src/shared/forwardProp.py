@@ -52,6 +52,8 @@ class ForwardProp:
     # for use in test phase
     def getTotalSquaredError(self):
         error = 0
+        print("expected", self.expectedOuts)
+        print("hypothesis", self.hypothesis)
         for i in range(len(self.expectedOuts)):
             error += math.pow((self.expectedOuts[i] - self.hypothesis[i]), 2)
         return error

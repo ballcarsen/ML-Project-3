@@ -45,12 +45,12 @@ class EvoAlg:
         # MOCK INPUTS FOR TESTING: PLEASE CHANGE!!!
         
         myInput = [random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1)]
-        print("input", myInput)
+        #print("input", myInput)
         fp = ForwardProp(network,myInput,expectedOut)
         hypothesis = helper.toArrayRep(fp.getHypothesis(), len(expectedOut))
-        print("raw hypothesis: ", fp.getRawHypothesis())
-        print("Hypothesis: ", hypothesis)
-        print("actual: ", expectedOut)
+        #print("raw hypothesis: ", fp.getRawHypothesis())
+        #print("Hypothesis: ", hypothesis)
+        #print("actual: ", expectedOut)
         #netPrinter = NetworkPrinter()
         #netPrinter.printNet(network)
         # if classification is correct, return 1

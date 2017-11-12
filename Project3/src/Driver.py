@@ -24,8 +24,8 @@ trainingDataIn = dataSet1.crossValidatedTrain[0]
 trainingDataOut = dataSet1.crossValidatedTrainOut[0]
 testDataIn = dataSet1.crossValidatedTest[0]
 testDataOut = dataSet1.crossValidatedTestOut[0]
-hiddenLayers = 2
-nodesPerHL = 10
+hiddenLayers = 1
+nodesPerHL = 3
 #one set of data points, the first fold, we can train and test by iterating a loop over dataSet1.CrossValidatedTrain, etc
 #to get the 10 folds
 #print(dataSet1.crossValidatedTrain[0])
