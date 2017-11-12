@@ -11,8 +11,10 @@ from matplotlib import pyplot as plt
 class BPAlg:
 
     def train(self, inputsArray, expectedOutputsArray, hiddenLayerNum, nodesInHLNum):
+        print("inputs: ", inputsArray)
+        print("outputs: ", expectedOutputsArray)
         plotErrors = []
-        alpha = .001
+        alpha = .01
         convergenceEpsilon = .01
         regularizationParam = .1
         netPrinter = NetworkPrinter()
@@ -26,7 +28,7 @@ class BPAlg:
             error = 0
             counter += 1
             print(counter)
-            if (counter > 2000): # 2000
+            if (counter > 100): # 2000
                 print("stopped early")
                 break
             # forward propagate
@@ -54,7 +56,6 @@ class BPAlg:
             #netPrinter.printNet(network)
         print(stop)
         plt.plot(plotErrors)
-        plt.axis([0,200000,0,30000000])
         plt.show()
         return network
         
@@ -72,6 +73,7 @@ class BPAlg:
         return errors
 
 
+'''
 trainingXData = []
 trainingYData = []
 testDataX = []
@@ -90,8 +92,7 @@ for i in range(10):
 
 
 #test functionality
-"""
 bpAlg = BPAlg()
 trainedNetwork = bpAlg.train(trainingXData,trainingYData, 2, 8)
 bpAlg.test(testDataX, testDataY, trainedNetwork)
-"""
+'''
