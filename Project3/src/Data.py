@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 #A class for the data sets, so we have an instance of the data and can reference different data sets from driver
 #pass the number of classes
 #call readData(fileName) to read the file
@@ -6,7 +8,8 @@
 from sklearn.model_selection import KFold
 import random
 import numpy as np
-from src import helper
+#from src import helper
+from . import helper
 class Data:
     def __init__(self, numClasses):
         self.numberOfClasses = numClasses

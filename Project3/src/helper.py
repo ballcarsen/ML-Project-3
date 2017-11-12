@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def toArrayRep(index, numberOfClasses):
         array = []
         for i in range(numberOfClasses):

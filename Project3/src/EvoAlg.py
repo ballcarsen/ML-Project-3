@@ -44,7 +44,7 @@ class EvoAlg:
         
         # MOCK INPUTS FOR TESTING: PLEASE CHANGE!!!
         
-        myInput = [random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1)]
+        #myInput = [random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1)]
         #print("input", myInput)
         fp = ForwardProp(network,myInput,expectedOut)
         hypothesis = helper.toArrayRep(fp.getHypothesis(), len(expectedOut))

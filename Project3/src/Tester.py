@@ -42,8 +42,24 @@ class Tester:
             return self.var1
         return (self.var1, self.var2)
 
+    def get_max(self):
+        max_val = self.e1[0]
+        for i in range(1, len(self.e1)):
+            if max_val < self.e1[i]:
+                max_val = self.e1[i]
+        return max_val
+
+    def get_min(self):
+        min_val = self.e1[0]
+        for i in range(1, len(self.e1)):
+            if min_val > self.e1[i]:
+                min_val = self.e1[i]
+        return min_val
+
     def get_stdev(self, desc = None):
-        if not desc: return (math.sqrt(self.var1), math.sqrt(self.var2))
+        if not desc: 
+            if not self.var2: return math.sqrt(self.var1)
+            return (math.sqrt(self.var1), math.sqrt(self.var2))
         if desc == self.desc1: return math.sqrt(self.var1)
         if desc == self.desc2 and self.var2: return math.sqrt(self.var2)
         else: return
