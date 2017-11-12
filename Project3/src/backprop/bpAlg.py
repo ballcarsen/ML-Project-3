@@ -55,8 +55,8 @@ class BPAlg:
             #print("------------- Post Gradient Descent -----------")
             #netPrinter.printNet(network)
         print(stop)
-        plt.plot(plotErrors)
-        plt.show()
+        #plt.plot(plotErrors)
+        #plt.show()
         return network
         
     def test(self, inputsArray, expectedOutputsArray, network):

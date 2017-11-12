@@ -44,7 +44,7 @@ class Data:
     
     def getFolds(self):
         input = np.array(self.data)
-        fold = KFold(n_splits= 5)
+        fold = KFold(n_splits= 10)
         count = 0
         for train,test in fold.split(input):
             self.crossValidatedTrain.append([])
