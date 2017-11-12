@@ -6,15 +6,16 @@ import math
 class EvoStrat(GeneticAlg):
     def updateVar(self, length, sigma):
         u = random.uniform(0,sigma)
+        if length == 0:
+            length = 1
         s = sigma * math.exp(u/math.sqrt(length))
         return s
     
     def gaussMuatate(self, child):
         for i in range(len(child) - 1):
             for k in range(len(child[i])):
-                for j in range(len(child[i][k].weights)):
+                for j in range(len(child[i][k].weights) - 1):
                     l = child[i][j].weights
-
                     sigma = self.var(l)
                     child[i][k].weights[j] = child[i][k].weights[j] + self.updateVar(len(l),sigma)
     def var(self, l):

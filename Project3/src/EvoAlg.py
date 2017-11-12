@@ -1,6 +1,7 @@
 #Super class for the three evolutionary training algorithms
 from src.backprop.bpNetCreator import BPNetCreator
 from src.shared.forwardProp import ForwardProp
+import random
 
 import random
 from src.shared.printNetwork import NetworkPrinter
@@ -39,11 +40,15 @@ class EvoAlg:
         return(totalCorrect / len(self.inputData))
 
 
-    def test(self, myInput, expectedOut, network):
+    def test(self, input, expectedOut, network):
         correct = 0 #incorrect by default
+        fp = ForwardProp(network, input, expectedOut)
+        if (fp.getHypothesis() == expectedOut.index(1)):
+            correct = 1
+        return correct
         
         # MOCK INPUTS FOR TESTING: PLEASE CHANGE!!!
-        
+        '''
         myInput = [random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1)]
         #print("input", myInput)
         fp = ForwardProp(network,myInput,expectedOut)
@@ -57,6 +62,8 @@ class EvoAlg:
         if (helper.arrayCompare(hypothesis, expectedOut)):
             correct = 1
         return correct
+        '''
+
 
     #will perform binary crossover on two networks, thought this could also just calculate the mask
     #this will return two children, I think mutation comes after crossover?

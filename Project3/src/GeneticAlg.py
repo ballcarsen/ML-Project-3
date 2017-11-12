@@ -35,9 +35,9 @@ class GeneticAlg(EvoAlg):
                         for child in childArr:
                             self.children.append(child)
             # mutate children
-            #for child in self.children:
+            for child in self.children:
                 #netPrinter.printNet(child)
-                #child = self.gaussMuatate(child, sigma)
+                child = self.gaussMuatate(child, sigma)
             # replace members of self.population with self.children if the children are more fit
             self.replaceAll()
             #print("pop size after repro: ", len(self.population))
@@ -73,7 +73,7 @@ class GeneticAlg(EvoAlg):
     def select(self):
         parents = []
         for i in range(self.popSize):
-            parents.append(self.tournamentSelection(self.popSize/200))
+            parents.append(self.tournamentSelection(self.popSize/2))
         return parents
         
     
