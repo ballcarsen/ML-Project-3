@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 import matplotlib.mlab as mlab
 import math
 import sys
-
+#Used to perform statistical test and graph normal distributions
 class Tester:
 
     def __init__(self, error1, error2 = None, e1_desc = '', e2_desc = ''):

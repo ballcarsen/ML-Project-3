@@ -43,26 +43,11 @@ class EvoAlg:
     def test(self, input, expectedOut, network):
         correct = 0 #incorrect by default
         fp = ForwardProp(network, input, expectedOut)
+        if 1 not in expectedOut:
+            return 0
         if (fp.getHypothesis() == expectedOut.index(1)):
             correct = 1
         return correct
-        
-        # MOCK INPUTS FOR TESTING: PLEASE CHANGE!!!
-        '''
-        myInput = [random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1)]
-        #print("input", myInput)
-        fp = ForwardProp(network,myInput,expectedOut)
-        hypothesis = helper.toArrayRep(fp.getHypothesis(), len(expectedOut))
-        #print("raw hypothesis: ", fp.getRawHypothesis())
-        #print("Hypothesis: ", hypothesis)
-        #print("actual: ", expectedOut)
-        #netPrinter = NetworkPrinter()
-        #netPrinter.printNet(network)
-        # if classification is correct, return 1
-        if (helper.arrayCompare(hypothesis, expectedOut)):
-            correct = 1
-        return correct
-        '''
 
 
     #will perform binary crossover on two networks, thought this could also just calculate the mask
@@ -91,12 +76,6 @@ class EvoAlg:
         #returns both the children, to be mutated and used in replacement
         return [child1, child2]
 
-    #Parent offspring replacement, returns 1 if child will replace parent, 0 if parent stays
-    '''
-    I did it this way because we will need to know the index of the parent so we can delete it if the parent gets replaced
-    We will know the index from the train method, so this way we wont need to pass the index, but we could if we want the
-    bulk of the replacement code to be in this method.
-    '''
    # replaces any parents with their children if their children have better fitness
     def replaceAll(self):
         for i in range(self.popSize):
@@ -116,7 +95,6 @@ class EvoAlg:
         best = self.population[0]
         for indiv in self.population:
             fit = self.evalFitness(indiv)
-            print("fitness: ", fit)
             if fit > maxFit:
                 maxFit = fit
                 best = indiv

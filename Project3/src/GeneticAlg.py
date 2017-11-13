@@ -18,8 +18,6 @@ class GeneticAlg(EvoAlg):
             self.children = [] # reset children array
             genCount += 1 # increment generation count
             parents = self.select() # select parents using tournament selection
-            #print("prior size of population: ", len(self.population))
-            #print("number of parents: ", len(parents))
             # populate children via crossover
             
             self.evalFitness(parents[0])
@@ -36,23 +34,19 @@ class GeneticAlg(EvoAlg):
                             self.children.append(child)
             # mutate children
             for child in self.children:
-                #netPrinter.printNet(child)
                 child = self.gaussMuatate(child, sigma)
             # replace members of self.population with self.children if the children are more fit
             self.replaceAll()
-            #print("pop size after repro: ", len(self.population))
-            netPrinter = NetworkPrinter()
-            netPrinter.printNet(self.getBestIndiv())
-            #print(self.evalFitness(self.getBestIndiv()), "performance")
-    
+
+    #mutation
     def gaussMuatate(self, child, sigma):
         for i in range(len(child) - 1):
             for k in range(len(child[i])):
                 for j in range(len(child[i][k].weights)):
                     mutationAmt = random.uniform(0,sigma)
-                    #print("mutation amount: ", mutationAmt)
-                    child[i][k].weights[j] = child[i][k].weights[j] + mutationAmt
 
+                    child[i][k].weights[j] = child[i][k].weights[j] + mutationAmt
+    #Caluclate the variance
     def calcSigma(self):
         weights = []
         count = 0
@@ -84,7 +78,6 @@ class GeneticAlg(EvoAlg):
             index = random.randint(0,self.popSize-1)
             competitors.append(self.population[index])
             k -= 1
-        #print(competitors)
         # compete the competitors to get winner and return winner
         winner = self.hostTournament(competitors)
         return winner

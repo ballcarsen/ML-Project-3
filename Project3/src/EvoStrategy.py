@@ -2,15 +2,16 @@ from src.GeneticAlg import GeneticAlg
 from src.Tester import Tester
 import random
 import math
-
+#Evolutionary Strategy
 class EvoStrat(GeneticAlg):
+    #Chagnges sigma
     def updateVar(self, length, sigma):
         u = random.uniform(0,sigma)
         if length == 0:
             length = 1
         s = sigma * math.exp(u/math.sqrt(length))
         return s
-    
+    #muttation
     def gaussMuatate(self, child):
         for i in range(len(child) - 1):
             for k in range(len(child[i])):
@@ -18,9 +19,11 @@ class EvoStrat(GeneticAlg):
                     l = child[i][j].weights
                     sigma = self.var(l)
                     child[i][k].weights[j] = child[i][k].weights[j] + self.updateVar(len(l),sigma)
+    #get variance of the weights
     def var(self, l):
         T1 = Tester(l)
         return  math.sqrt(T1.get_variance())
+    #train the networks
     def train(self, maxIterations):
         # for each generation
         genCount = 0
@@ -28,8 +31,6 @@ class EvoStrat(GeneticAlg):
             self.children = [] # reset children array
             genCount += 1 # increment generation count
             parents = self.select() # select parents using tournament selection
-            #print("prior size of population: ", len(self.population))
-            #print("number of parents: ", len(parents))
             # populate children via crossover
             for i in range(len(parents)): # for every parent
                 # by steps of two
@@ -47,7 +48,4 @@ class EvoStrat(GeneticAlg):
                 child = self.gaussMuatate(child)
             # replace members of self.population with self.children if the children are more fit
             self.replaceAll()
-            #print("pop size after repro: ", len(self.population))
-            #netPrinter = NetworkPrinter()
-            #netPrinter.printNet(self.getBestIndiv())
             print(self.evalFitness(self.getBestIndiv()), "performance")
